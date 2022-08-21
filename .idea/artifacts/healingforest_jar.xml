@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="healingforest:jar">
+    <output-path>$USER_HOME$/Desktop/Minecraft/Paper_Bukkit/plugins</output-path>
+    <root id="archive" name="HealingForest.jar">
+      <element id="module-output" name="healingforest" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/23.0.0/annotations-23.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.7.20-Beta/kotlin-stdlib-jdk7-1.7.20-Beta.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.7.20-Beta/kotlin-stdlib-jdk8-1.7.20-Beta.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib/1.7.20-Beta/kotlin-stdlib-1.7.20-Beta.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib-common/1.7.20-Beta/kotlin-stdlib-common-1.7.20-Beta.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

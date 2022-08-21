@@ -1,0 +1,9 @@
+name: HealingForest
+version: '${project.version}'
+main: green.healingforest.Main
+api-version: 1.19
+commands:
+  test:
+    description: Command for testing plugin.
+  npc:
+    description: NPC management command.
