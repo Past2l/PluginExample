@@ -8,7 +8,7 @@ class NPCSpawn: SubCommand() {
     override val description: String = ""
     override val syntax: String = ""
 
-    override fun perform(player: Player, args: Array<out String>) {
+    override fun run(player: Player, args: Array<out String>) {
 
     }
 }

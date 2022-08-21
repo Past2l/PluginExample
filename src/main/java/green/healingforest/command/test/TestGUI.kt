@@ -9,7 +9,7 @@ class TestGUI: SubCommand() {
     override val description: String = "Open the Test GUI"
     override val syntax: String = "/test gui"
 
-    override fun perform(player: Player, args: Array<out String>) {
+    override fun run(player: Player, args: Array<out String>) {
         TestMenu().openTo(player)
     }
 }
