@@ -31,9 +31,8 @@ open class Command @JvmOverloads constructor(
             sender.sendMessage("${ChatColor.RED}Permission Denied.${ChatColor.RESET}")
             return false
         } else if(args == null || args.isEmpty()) {
-            sender.sendMessage("--------------------------------")
-            commands.forEach { sender.sendMessage("${it.syntax} - ${it.description}")}
-            sender.sendMessage("--------------------------------")
+            sender.sendMessage("${ChatColor.YELLOW}---------------${ChatColor.RESET} Help: /$label ${ChatColor.YELLOW}---------------")
+            commands.forEach { sender.sendMessage("${ChatColor.GOLD}${it.syntax}: ${ChatColor.RESET}${it.description}")}
         } else commands.forEach { if(args[0] == it.name) it.run(sender, args) }
         return true
     }
