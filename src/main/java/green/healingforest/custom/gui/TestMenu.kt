@@ -11,19 +11,6 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 class TestMenu {
-    private val gui = GUI(
-        Component.text("test gui"),
-        6,
-        false,
-        openEvent = { gui, player ->
-            player.sendMessage("opened test gui")
-        },
-        closeEvent = { event ->
-            event!!.player.sendMessage("closed test gui")
-        }
-    )
-    private val item: Array<Array<ItemStack?>?> = arrayOfNulls(6)
-    private val event: Array<Array<GUIClickEvent?>?> = arrayOfNulls(6)
 
     init {
         // Set GUI Null Items
@@ -48,7 +35,24 @@ class TestMenu {
         gui.setItem(item, event)
     }
 
-    fun openTo(player: Player) {
-        this.gui.openTo(player)
+    companion object {
+        private val gui = GUI(
+            Component.text("test gui"),
+            6,
+            false,
+            openEvent = { gui, player ->
+                player.sendMessage("opened test gui")
+            },
+            closeEvent = { event ->
+                event!!.player.sendMessage("closed test gui")
+            }
+        )
+        private val item: Array<Array<ItemStack?>?> = arrayOfNulls(6)
+        private val event: Array<Array<GUIClickEvent?>?> = arrayOfNulls(6)
+
+        fun openTo(player: Player) {
+            this.gui.openTo(player)
+        }
     }
+
 }
