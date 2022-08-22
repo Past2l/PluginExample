@@ -1,20 +1,18 @@
 package green.healingforest.util
 
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.TextComponent
-import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
+import org.bukkit.inventory.ItemStack
+import org.bukkit.util.io.BukkitObjectOutputStream
+import java.io.ByteArrayOutputStream
+import java.util.Base64
 
 class Serialize {
     companion object {
-        fun component(data: Component): String {
-            return GsonComponentSerializer.gson().serialize(data)
+        fun item(item: ItemStack): String {
+            val io = ByteArrayOutputStream()
+            val os = BukkitObjectOutputStream(io)
+            os.writeObject(item)
+            os.flush()
+            return Base64.getEncoder().encodeToString(io.toByteArray())
         }
-
-        fun prefix(data: Component): String {
-            val text = data as TextComponent
-            return LegacyComponentSerializer.legacyAmpersand().serialize(text)
-        }
-
     }
 }

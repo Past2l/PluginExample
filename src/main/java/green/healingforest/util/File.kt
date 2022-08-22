@@ -2,8 +2,8 @@ package green.healingforest.util
 
 import java.io.BufferedWriter
 import java.io.File
-import java.io.FileWriter
-
+import java.io.FileOutputStream
+import java.io.OutputStreamWriter
 
 class File {
     companion object {
@@ -13,14 +13,16 @@ class File {
                 if(!file.parentFile.exists()) file.parentFile.mkdirs();
                 file.createNewFile();
             }
-            val out = BufferedWriter(FileWriter(file))
-            out.write(data)
-            out.close()
+            FileOutputStream(file).use { fos ->
+                OutputStreamWriter(fos, Charsets.UTF_8).use { osw ->
+                    BufferedWriter(osw).use { bf -> bf.write(data) }
+                }
+            }
         }
 
         fun read(path: String): String? {
             val file = File("plugins/HealingForest", path)
-            return if (file.exists()) file.readText() else null
+            return if (file.exists()) file.readText(Charsets.UTF_8) else null
         }
 
         fun list(path: String): Array<String> {

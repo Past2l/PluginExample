@@ -1,6 +1,5 @@
 package green.healingforest.util
 
-import net.kyori.adventure.text.TextComponent
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
@@ -16,16 +15,16 @@ class Item @JvmOverloads constructor(
         item = ItemStack(material, amount)
     }
 
-    fun setName(name: TextComponent): ItemStack {
+    fun setName(name: String): ItemStack {
         val itemMeta = item.itemMeta
-        itemMeta.displayName(name)
+        itemMeta?.setDisplayName(name)
         item.itemMeta = itemMeta
         return item
     }
 
-    fun setLore(lore: List<TextComponent>): ItemStack {
+    fun setLore(lore: MutableList<String>): ItemStack {
         val itemMeta = item.itemMeta
-        itemMeta.lore(lore)
+        itemMeta?.lore = lore
         item.itemMeta = itemMeta
         return item
     }
@@ -35,36 +34,36 @@ class Item @JvmOverloads constructor(
         level: Int
     ): ItemStack {
         val itemMeta = item.itemMeta
-        itemMeta.addEnchant(enchantment, level, true)
+        itemMeta?.addEnchant(enchantment, level, true)
         item.itemMeta = itemMeta
         return item
     }
 
     fun setEnchantments(enchantments: Map<Enchantment, Int>): ItemStack {
         val itemMeta = item.itemMeta
-        for(e in enchantments) itemMeta.addEnchant(e.key, e.value, true)
+        for(e in enchantments) itemMeta?.addEnchant(e.key, e.value, true)
         item.itemMeta = itemMeta
         return item
     }
 
     fun setItemFlag(flag: ItemFlag): ItemStack {
         val itemMeta = item.itemMeta
-        itemMeta.addItemFlags(flag)
+        itemMeta?.addItemFlags(flag)
         item.itemMeta = itemMeta
         return item
     }
 
     fun setItemFlags(flags: List<ItemFlag>): ItemStack {
         val itemMeta = item.itemMeta
-        for(e in flags) item.addItemFlags(e)
+        for(e in flags) itemMeta?.addItemFlags(e)
         item.itemMeta = itemMeta
         return item
     }
 
     fun glow(): ItemStack {
         val itemMeta = item.itemMeta
-        itemMeta.addEnchant(Enchantment.DURABILITY, 1, true)
-        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS)
+        itemMeta?.addEnchant(Enchantment.DURABILITY, 1, true)
+        itemMeta?.addItemFlags(ItemFlag.HIDE_ENCHANTS)
         item.itemMeta = itemMeta
         return item
     }

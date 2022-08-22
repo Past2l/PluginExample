@@ -22,15 +22,15 @@ open class Command @JvmOverloads constructor(
         sender: CommandSender,
         command: Command,
         label: String,
-        args: Array<out String>?
+        args: Array<out String>
     ): Boolean {
         if(sender !is org.bukkit.entity.Player) return false
         if(onlyOP && !sender.isOp) {
-            sender.sendMessage("${ChatColor.RED}Permission Denied.${ChatColor.RESET}")
+            sender.sendMessage("§4Permission Denied.§r")
             return false
-        } else if(args == null || args.isEmpty()) {
-            sender.sendMessage("${ChatColor.YELLOW}---------------${ChatColor.RESET} Help: /$label ${ChatColor.YELLOW}---------------")
-            commands.forEach { sender.sendMessage("${ChatColor.GOLD}${it.syntax}: ${ChatColor.RESET}${it.description}")}
+        } else if(args.isEmpty()) {
+            sender.sendMessage("§e---------------§r Help: /$label §e---------------")
+            commands.forEach { sender.sendMessage("§6${it.syntax}: §r${it.description}")}
         } else commands.forEach { if(args[0] == it.name) it.run(sender, command, label, args) }
         return true
     }
@@ -39,11 +39,11 @@ open class Command @JvmOverloads constructor(
         sender: CommandSender,
         command: Command,
         label: String,
-        args: Array<out String>?
+        args: Array<out String>
     ): MutableList<String>? {
         if(sender !is org.bukkit.entity.Player) return mutableListOf()
         return if(onlyOP && !sender.isOp) mutableListOf()
-        else when(args?.size) {
+        else when(args.size) {
             1 -> commands.map { it.name } as MutableList
             else -> mutableListOf()
         }

@@ -1,17 +1,16 @@
 package green.healingforest.util
 
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
+import org.bukkit.inventory.ItemStack
+import org.bukkit.util.io.BukkitObjectInputStream
+import java.io.ByteArrayInputStream
+import java.util.Base64
 
 class Deserialize {
     companion object {
-        fun component(data: String): Component {
-            return GsonComponentSerializer.gson().deserialize(data);
-        }
-
-        fun prefix(data: String): Component {
-            return LegacyComponentSerializer.legacyAmpersand().deserialize(data)
+        fun item(item: String): ItemStack {
+            val io = ByteArrayInputStream(Base64.getDecoder().decode(item))
+            val os = BukkitObjectInputStream(io)
+            return os.readObject() as ItemStack
         }
     }
 }

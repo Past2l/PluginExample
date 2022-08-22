@@ -1,11 +1,9 @@
 package green.healingforest.entity
 
 import green.healingforest.gui.GUI
-import green.healingforest.util.Deserialize
 import green.healingforest.util.JSON
-import green.healingforest.util.Serialize
-import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -16,7 +14,7 @@ class Player {
 
         fun createData(): PlayerData {
             return PlayerData(
-                prefix = Component.text(""),
+                prefix = "",
                 money = 0,
                 popularity = 0
             )
@@ -25,7 +23,7 @@ class Player {
         fun loadData(player: org.bukkit.entity.Player): PlayerData? {
             val data = JSON.read("playerdata/${player.uniqueId}.json")
             return if(data== null) null else PlayerData(
-                prefix = Deserialize.prefix(data["prefix"] ?: ""),
+                prefix = data["prefix"] ?: "",
                 money = data["money"]?.toInt() ?: 0,
                 popularity = data["popularity"]?.toInt() ?: 0
             )
@@ -35,7 +33,7 @@ class Player {
             val data = this.dataMap[player.uniqueId]
             val hashMap: HashMap<String, String> = hashMapOf()
             if(data != null) {
-                hashMap["prefix"] = Serialize.prefix(data.prefix)
+                hashMap["prefix"] = data.prefix
                 hashMap["money"] = data.money.toString()
                 hashMap["popularity"] = data.popularity.toString()
                 JSON.write("playerdata/${player.uniqueId}.json", hashMap)
@@ -43,7 +41,8 @@ class Player {
         }
 
         fun loadAllData() {
-            for(player in Bukkit.getServer().onlinePlayers) this.dataMap[player.uniqueId] = this.loadData(player) ?: this.createData()
+            for(player in Bukkit.getServer().onlinePlayers)
+                this.dataMap[player.uniqueId] = this.loadData(player) ?: this.createData()
         }
 
         fun saveAllData() {

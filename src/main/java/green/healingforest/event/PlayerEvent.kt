@@ -2,15 +2,10 @@ package green.healingforest.event
 
 import green.healingforest.entity.Player
 import green.healingforest.entity.PlayerData
-import io.papermc.paper.event.player.AsyncChatEvent
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.TextColor
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.player.PlayerInteractAtEntityEvent
-import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.event.player.*
 
 class PlayerEvent: Listener {
     @EventHandler
@@ -26,27 +21,16 @@ class PlayerEvent: Listener {
     }
 
     @EventHandler
-    fun onChat(event: AsyncChatEvent) {
+    fun onChat(event: AsyncPlayerChatEvent) {
         val prefix = Player.dataMap[event.player.uniqueId]?.prefix
-        event.renderer { player, _, component, _ ->
-            Component.text("")
-                .append(
-                    prefix?.append(
-                        Component.text(" ").color(TextColor.color(0xffffff))
-                    ) ?: Component.text("")
-                )
-                .append(Component.text("").color(TextColor.color(0xffffff)))
-                .append(player.displayName())
-                .append(Component.text(" > ").color(TextColor.color(0xffffff)))
-                .append(component)
-        }
+        event.format = (if(prefix != null && prefix.isNotEmpty()) "$prefix " else "") + "${event.player.displayName} > ${event.message}"
     }
 
     @EventHandler
     fun onPlayerInteractByPlayer(event: PlayerInteractAtEntityEvent) {
         if(event.rightClicked !is org.bukkit.entity.Player) return
         val player = Bukkit.getPlayer(event.rightClicked.name) ?: return
-        event.player.sendMessage(player.displayName())
-        event.player.sendMessage("Sneaking : ${event.player.isSneaking}")
+        event.player.sendMessage("§a${player.displayName}§r")
+        event.player.sendMessage("Sneaking : §a${event.player.isSneaking}§r")
     }
 }

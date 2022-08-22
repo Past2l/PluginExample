@@ -1,15 +1,15 @@
-package green.healingforest;
+package green.healingforest
 
-import green.healingforest.command.NPC
-import green.healingforest.command.Test
+import green.healingforest.custom.command.NPC
+import green.healingforest.custom.command.Test
+import green.healingforest.entity.Player
 import green.healingforest.event.GUIEvent
 import green.healingforest.event.PlayerEvent
-import green.healingforest.entity.Player
 import org.bukkit.Bukkit
 import org.bukkit.GameRule
 import org.bukkit.plugin.java.JavaPlugin
 
-class Main: JavaPlugin() {
+class Main : JavaPlugin() {
     override fun onEnable() {
         this.initCommands()
         this.initEvents()
@@ -47,5 +47,3 @@ class Main: JavaPlugin() {
         }
     }
 }
-
-

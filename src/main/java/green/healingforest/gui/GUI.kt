@@ -1,6 +1,5 @@
 package green.healingforest.gui
 
-import net.kyori.adventure.text.TextComponent
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
@@ -9,30 +8,22 @@ import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 
 class GUI @JvmOverloads constructor(
-    private val title: TextComponent,
+    val title: String,
     lines: Int,
-    clickAll: Boolean,
-    click: Array<Array<Boolean>?>? = null,
-    openEvent: GUIOpenEvent? = null,
-    closeEvent: GUICloseEvent? = null,
+    private val clickAll: Boolean = false,
+    private val click: Array<Array<Boolean>?>? = null,
+    private val openEvent: GUIOpenEvent? = null,
+    private val closeEvent: GUICloseEvent? = null,
     owner: InventoryHolder? = null
 ) {
     private val inventory: Inventory
-    private var openEvent: GUIOpenEvent?
-    private val click: Array<Array<Boolean>?>?
-    private val clickAll: Boolean
-    private val closeEvent: GUICloseEvent?
 
     companion object {
-        val clickEvent: HashMap<Int, GUIClickEvent> = HashMap<Int, GUIClickEvent>()
+        val clickEvent = hashMapOf<Int, GUIClickEvent>()
     }
 
     init {
-        inventory = Bukkit.createInventory(owner, lines * 9, title)
-        this.openEvent = openEvent
-        this.closeEvent = closeEvent
-        this.click = click
-        this.clickAll = clickAll
+        this.inventory = Bukkit.createInventory(owner, lines * 9, title)
     }
 
     fun getItem(slot: Int): ItemStack? {
@@ -49,7 +40,10 @@ class GUI @JvmOverloads constructor(
         if(event != null) setClickEvent(slot, event)
     }
 
-    fun setItem(item: Array<Array<ItemStack?>?>, clickEvent: Array<Array<GUIClickEvent?>?>? = null) {
+    fun setItem(
+        item: Array<Array<ItemStack?>?>,
+        clickEvent: Array<Array<GUIClickEvent?>?>? = null
+    ) {
         for(i in item.indices) {
             val list = item[i]
             if(list != null) for(j in list.indices) {
@@ -78,10 +72,6 @@ class GUI @JvmOverloads constructor(
 
     fun canClick(slot: Int): Boolean {
         return if(click == null) clickAll else click[slot/9]!![slot%9]
-    }
-
-    fun equalsTitle(title: TextComponent?): Boolean {
-        return this.title.content() == title!!.content()
     }
 
     fun openTo(player: Player) {
