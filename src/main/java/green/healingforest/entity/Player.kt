@@ -17,7 +17,8 @@ class Player {
         fun createData(): PlayerData {
             return PlayerData(
                 prefix = Component.text(""),
-                money = 0
+                money = 0,
+                popularity = 0
             )
         }
 
@@ -25,7 +26,8 @@ class Player {
             val data = JSON.read("playerdata/${player.uniqueId}.json")
             return if(data== null) null else PlayerData(
                 prefix = Deserialize.prefix(data["prefix"] ?: ""),
-                money = data["money"]?.toInt() ?: 0
+                money = data["money"]?.toInt() ?: 0,
+                popularity = data["popularity"]?.toInt() ?: 0
             )
         }
 
@@ -35,6 +37,7 @@ class Player {
             if(data != null) {
                 hashMap["prefix"] = Serialize.prefix(data.prefix)
                 hashMap["money"] = data.money.toString()
+                hashMap["popularity"] = data.popularity.toString()
                 JSON.write("playerdata/${player.uniqueId}.json", hashMap)
             }
         }
