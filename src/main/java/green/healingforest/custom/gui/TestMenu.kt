@@ -40,7 +40,7 @@ class TestMenu {
             Component.text("test gui"),
             6,
             false,
-            openEvent = { gui, player ->
+            openEvent = { _, player ->
                 player.sendMessage("opened test gui")
             },
             closeEvent = { event ->
