@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent
 class PlayerEvent: Listener {
     @EventHandler
     fun onJoined(event: PlayerJoinEvent) {
-        val data: PlayerData = Player.loadData(event.player) ?: Player.createData(event.player)
+        val data: PlayerData = Player.loadData(event.player) ?: Player.createData()
         Player.dataMap[event.player.uniqueId] = data
     }
 
