@@ -1,7 +1,5 @@
 package green.healingforest.command
 
-import green.healingforest.command.npc.NPCSpawn
-import green.healingforest.entity.Player
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -27,7 +25,7 @@ open class Command @JvmOverloads constructor(
         args: Array<out String>?
     ): Boolean {
         if(sender !is org.bukkit.entity.Player) return false
-        if(onlyOP && (!sender.isOp || !Player.dataMap[sender.uniqueId]!!.admin)) {
+        if(onlyOP && !sender.isOp) {
             sender.sendMessage("${ChatColor.RED}Permission Denied.${ChatColor.RESET}")
             return false
         } else if(args == null || args.isEmpty()) {
@@ -44,7 +42,7 @@ open class Command @JvmOverloads constructor(
         args: Array<out String>?
     ): MutableList<String>? {
         if(sender !is org.bukkit.entity.Player) return mutableListOf()
-        return if(!sender.isOp || !Player.dataMap[sender.uniqueId]!!.admin) mutableListOf()
+        return if(onlyOP && !sender.isOp) mutableListOf()
         else when(args?.size) {
             1 -> commands.map { it.name } as MutableList
             else -> mutableListOf()
