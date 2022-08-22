@@ -5,8 +5,10 @@ import green.healingforest.entity.PlayerData
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
+import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 
@@ -38,5 +40,13 @@ class PlayerEvent: Listener {
                 .append(Component.text(" > ").color(TextColor.color(0xffffff)))
                 .append(component)
         }
+    }
+
+    @EventHandler
+    fun onPlayerInteractByPlayer(event: PlayerInteractAtEntityEvent) {
+        if(event.rightClicked !is org.bukkit.entity.Player) return
+        val player = Bukkit.getPlayer(event.rightClicked.name) ?: return
+        event.player.sendMessage(player.displayName())
+        event.player.sendMessage("Sneaking : ${event.player.isSneaking}")
     }
 }
