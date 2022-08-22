@@ -31,7 +31,7 @@ open class Command @JvmOverloads constructor(
         } else if(args == null || args.isEmpty()) {
             sender.sendMessage("${ChatColor.YELLOW}---------------${ChatColor.RESET} Help: /$label ${ChatColor.YELLOW}---------------")
             commands.forEach { sender.sendMessage("${ChatColor.GOLD}${it.syntax}: ${ChatColor.RESET}${it.description}")}
-        } else commands.forEach { if(args[0] == it.name) it.run(sender, args) }
+        } else commands.forEach { if(args[0] == it.name) it.run(sender, command, label, args) }
         return true
     }
 
