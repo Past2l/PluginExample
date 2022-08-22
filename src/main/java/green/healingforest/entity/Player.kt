@@ -14,7 +14,7 @@ class Player {
         val guiMap: HashMap<UUID, GUI> = HashMap()
         val dataMap: HashMap<UUID, PlayerData> = HashMap()
 
-        fun createData(player: org.bukkit.entity.Player): PlayerData {
+        fun createData(): PlayerData {
             return PlayerData(
                 prefix = Component.text(""),
                 admin = false,
@@ -43,7 +43,7 @@ class Player {
         }
 
         fun loadAllData() {
-            for(player in Bukkit.getServer().onlinePlayers) this.dataMap[player.uniqueId] = this.loadData(player) ?: this.createData(player)
+            for(player in Bukkit.getServer().onlinePlayers) this.dataMap[player.uniqueId] = this.loadData(player) ?: this.createData()
         }
 
         fun saveAllData() {

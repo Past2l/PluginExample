@@ -29,10 +29,10 @@ class PlayerEvent: Listener {
         event.renderer { player, _, component, _ ->
             Component.text("")
                 .append(
-                    if(prefix != null) (prefix as Component).append(
+                    prefix?.append(
                         Component.text(" ").color(TextColor.color(0xffffff))
-                    )
-                    else Component.text(""))
+                    ) ?: Component.text("")
+                )
                 .append(Component.text("").color(TextColor.color(0xffffff)))
                 .append(player.displayName())
                 .append(Component.text(" > ").color(TextColor.color(0xffffff)))
