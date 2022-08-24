@@ -2,6 +2,8 @@ name: HealingForest
 version: '${project.version}'
 main: green.healingforest.Main
 api-version: 1.19
+libraries:
+  - com.squareup.okhttp3:okhttp:4.9.0
 commands:
   test:
     description: Command for testing plugin.

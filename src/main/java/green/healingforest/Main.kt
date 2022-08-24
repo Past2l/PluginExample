@@ -4,6 +4,7 @@ import green.healingforest.custom.command.NPC
 import green.healingforest.custom.command.Test
 import green.healingforest.entity.Player
 import green.healingforest.event.GUIEvent
+import green.healingforest.event.NPCEvent
 import green.healingforest.event.PlayerEvent
 import org.bukkit.Bukkit
 import org.bukkit.GameRule
@@ -33,6 +34,7 @@ class Main : JavaPlugin() {
     private fun initEvents() {
         server.pluginManager.registerEvents(GUIEvent(),this)
         server.pluginManager.registerEvents(PlayerEvent(), this)
+        server.pluginManager.registerEvents(NPCEvent(), this)
     }
 
     private fun initGameRules() {

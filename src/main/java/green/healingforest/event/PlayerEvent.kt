@@ -23,7 +23,7 @@ class PlayerEvent: Listener {
     @EventHandler
     fun onChat(event: AsyncPlayerChatEvent) {
         val prefix = Player.dataMap[event.player.uniqueId]?.prefix
-        event.format = (if(prefix != null && prefix.isNotEmpty()) "$prefix " else "") + "${event.player.displayName} > ${event.message}"
+        event.format = (if(!prefix.isNullOrEmpty()) "$prefix " else "") + "${event.player.displayName} > ${event.message}"
     }
 
     @EventHandler

@@ -12,7 +12,7 @@
     <name>HealingForest</name>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.7.10</kotlin.version>
     </properties>
@@ -56,7 +56,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <jvmTarget>1.8</jvmTarget>
+                    <jvmTarget>17</jvmTarget>
                 </configuration>
             </plugin>
             <plugin>
@@ -84,6 +84,39 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>net.md-5</groupId>-->
+<!--                <artifactId>specialsource-maven-plugin</artifactId>-->
+<!--                <version>1.2.4</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>remap</goal>-->
+<!--                        </goals>-->
+<!--                        <id>remap-obf</id>-->
+<!--                        <configuration>-->
+<!--                            <srgIn>org.spigotmc:minecraft-server:1.19.2-R0.1-SNAPSHOT:txt:maps-mojang</srgIn>-->
+<!--                            <reverse>true</reverse>-->
+<!--                            <remappedDependencies>org.spigotmc:spigot:1.19.2-R0.1-SNAPSHOT:jar:remapped-mojang</remappedDependencies>-->
+<!--                            <remappedArtifactAttached>true</remappedArtifactAttached>-->
+<!--                            <remappedClassifierName>remapped-obf</remappedClassifierName>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>remap</goal>-->
+<!--                        </goals>-->
+<!--                        <id>remap-spigot</id>-->
+<!--                        <configuration>-->
+<!--                            <inputFile>${project.build.directory}/${project.artifactId}-${project.version}-remapped-obf.jar</inputFile>-->
+<!--                            <srgIn>org.spigotmc:minecraft-server:1.19.2-R0.1-SNAPSHOT:csrg:maps-spigot</srgIn>-->
+<!--                            <remappedDependencies>org.spigotmc:spigot:1.19.2-R0.1-SNAPSHOT:jar:remapped-obf</remappedDependencies>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
         <resources>
             <resource>
@@ -107,8 +140,9 @@
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
+            <artifactId>spigot</artifactId>
             <version>1.19.2-R0.1-SNAPSHOT</version>
+<!--            <classifier>remapped-mojang</classifier>-->
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -128,7 +162,7 @@
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
+            <artifactId>kotlin-test-junit</artifactId>
             <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>

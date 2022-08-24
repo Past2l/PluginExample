@@ -1,22 +1,14 @@
 package green.healingforest.command
 
-import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
 
 open class Command @JvmOverloads constructor(
-    commands: Array<SubCommand>,
-    onlyOP: Boolean = false
+    private val commands: Array<SubCommand>,
+    private val onlyOP: Boolean = false
 ): CommandExecutor, TabExecutor {
-    private val commands: Array<SubCommand>
-    private val onlyOP: Boolean
-
-    init {
-        this.commands = commands
-        this.onlyOP = onlyOP
-    }
 
     override fun onCommand(
         sender: CommandSender,
@@ -31,7 +23,7 @@ open class Command @JvmOverloads constructor(
         } else if(args.isEmpty()) {
             sender.sendMessage("§e---------------§r Help: /$label §e---------------")
             commands.forEach { sender.sendMessage("§6${it.syntax}: §r${it.description}")}
-        } else commands.forEach { if(args[0] == it.name) it.run(sender, command, label, args) }
+        } else commands.forEach { if(args[0] == it.name) it.onCommand(sender, command, label, args) }
         return true
     }
 
@@ -42,10 +34,13 @@ open class Command @JvmOverloads constructor(
         args: Array<out String>
     ): MutableList<String>? {
         if(sender !is org.bukkit.entity.Player) return mutableListOf()
-        return if(onlyOP && !sender.isOp) mutableListOf()
-        else when(args.size) {
-            1 -> commands.map { it.name } as MutableList
-            else -> mutableListOf()
+        if(onlyOP && !sender.isOp) return mutableListOf()
+        when(args.size) {
+            1 -> return commands.map { it.name } as MutableList
+            else -> {
+                for(it in commands) if(args[args.size-2] == it.name) return it.onTabComplete(sender, command, label, args)
+                return mutableListOf()
+            }
         }
     }
 }

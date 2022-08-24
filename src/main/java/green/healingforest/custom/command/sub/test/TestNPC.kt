@@ -1,25 +1,28 @@
 package green.healingforest.custom.command.sub.test
 
 import green.healingforest.command.SubCommand
-import green.healingforest.custom.gui.TestMenu
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
 
-class TestGUI: SubCommand {
-    override val commands: MutableList<SubCommand> = mutableListOf()
-    override val name: String = "gui"
-    override val description: String = "Open the Test GUI"
-    override val syntax: String = "/test gui"
+
+class TestNPC: SubCommand {
+    override val commands: MutableList<SubCommand> = mutableListOf(TestNPCSpawn(),TestNPCRemove())
+    override val name: String = "npc"
+    override val description: String = "test npc"
+    override val syntax: String = "/test npc"
     override fun onCommand(
         sender: CommandSender,
         command: Command,
         label: String,
         args: Array<out String>
     ): Boolean {
-        TestMenu().openTo(sender as Player)
+        if(args.size <= 1) {
+            sender.sendMessage("§e---------------§r Help: $syntax §e---------------")
+            commands.forEach { sender.sendMessage("§6${it.syntax}: §r${it.description}")}
+        } else commands.forEach { if(args[1] == it.name) it.onCommand(sender, command, label, args) }
         return true
     }
+
     override fun onTabComplete(
         sender: CommandSender,
         command: Command,
