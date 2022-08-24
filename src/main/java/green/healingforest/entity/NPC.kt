@@ -3,10 +3,10 @@ package green.healingforest.entity
 import com.mojang.authlib.GameProfile
 import com.mojang.authlib.properties.Property
 import net.minecraft.network.protocol.game.*
+import net.minecraft.network.protocol.game.PacketPlayOutEntity.PacketPlayOutEntityLook
 import net.minecraft.network.syncher.DataWatcher
 import net.minecraft.network.syncher.DataWatcherObject
 import net.minecraft.network.syncher.DataWatcherRegistry
-import net.minecraft.network.syncher.DataWatcherSerializer
 import net.minecraft.server.level.EntityPlayer
 import org.bukkit.Bukkit
 import org.bukkit.craftbukkit.v1_19_R1.CraftServer
@@ -31,16 +31,24 @@ class NPC(
 
         fun render(player: Player, npc: EntityPlayer) {
 //            val watcher: DataWatcher = npc.ai()
-//            watcher.a(DataWatcherObject(16, DataWatcherRegistry.a), 127.toByte())
             val connection = (player as CraftPlayer).handle.b
+            val yaw = (player.location.yaw * 256 / 360).toInt().toByte()
+            val pitch = (player.location.pitch * 256 / 360).toInt().toByte()
+//            watcher.registrationLocked = false
+//            watcher.a(DataWatcherObject(16, DataWatcherRegistry.a), 127.toByte())
 //            connection.a(PacketPlayOutEntityMetadata(npc.ae(), watcher, true))
             connection.a(PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, npc))
             connection.a(PacketPlayOutNamedEntitySpawn(npc))
-            connection.a(PacketPlayOutEntityHeadRotation(npc, (npc.x * 256 / 360).toInt().toByte()))
+            connection.a(PacketPlayOutEntityHeadRotation(npc, yaw))
+            connection.a(PacketPlayOutEntityLook(npc.ae(), yaw, pitch, true))
         }
 
         fun remove() {
-            for(npc in list) npc.remove()
+            for(npc in list) {
+                npc.remove()
+//                list.remove(npc)
+//                TODO
+            }
         }
     }
 
