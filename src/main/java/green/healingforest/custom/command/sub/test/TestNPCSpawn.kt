@@ -19,7 +19,7 @@ class TestNPCSpawn: SubCommand {
     ): Boolean {
         NPC(
             sender as Player,
-            "Bbakku..?",
+            "Bbakku_",
             null,
             null,
             "ewogICJ0aW1lc3RhbXAiIDogMTY2MTMyNzg2MDU4MSwKICAicHJvZmlsZUlkIiA6ICI2OGZmNDA4OTc5Nzg0NmRkYTA2YzU0ODcyNGRkMDliMCIsCiAgInByb2ZpbGVOYW1lIiA6ICJCYmFra3VfIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2M2MzE5MGNmYzcxNTU2ZGMzMzY3OGFkMDQ4YWEzMjk5Y2QwZmQzOTVlNzRiZWQ0MTYxYTE3NTU4YTUwZTA5ZGYiLAogICAgICAibWV0YWRhdGEiIDogewogICAgICAgICJtb2RlbCIgOiAic2xpbSIKICAgICAgfQogICAgfQogIH0KfQ==",

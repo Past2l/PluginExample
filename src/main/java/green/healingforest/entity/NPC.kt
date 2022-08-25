@@ -25,30 +25,33 @@ class NPC(
 ) {
     val npc: EntityPlayer
     val uuid: UUID
+    val id: Int
 
     companion object {
-        val list = arrayListOf<NPC>()
+        var npcMap = hashMapOf<Int, NPC>()
 
         fun render(player: Player, npc: EntityPlayer) {
-//            val watcher: DataWatcher = npc.ai()
+            val watcher: DataWatcher = npc.ai()
+            watcher.registrationLocked = false
             val connection = (player as CraftPlayer).handle.b
             val yaw = (player.location.yaw * 256 / 360).toInt().toByte()
             val pitch = (player.location.pitch * 256 / 360).toInt().toByte()
-//            watcher.registrationLocked = false
-//            watcher.a(DataWatcherObject(16, DataWatcherRegistry.a), 127.toByte())
-//            connection.a(PacketPlayOutEntityMetadata(npc.ae(), watcher, true))
             connection.a(PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, npc))
             connection.a(PacketPlayOutNamedEntitySpawn(npc))
             connection.a(PacketPlayOutEntityHeadRotation(npc, yaw))
             connection.a(PacketPlayOutEntityLook(npc.ae(), yaw, pitch, true))
+//            watcher.a(DataWatcherRegistry.a.a(16), 127.toByte())
+//            connection.a(PacketPlayOutEntityMetadata(npc.ae(), watcher, true))
         }
 
         fun remove() {
-            for(npc in list) {
-                npc.remove()
-//                list.remove(npc)
-//                TODO
+            npcMap.values.forEach { npc ->
+                for(player in Bukkit.getOnlinePlayers()) {
+                    val connection = (player as CraftPlayer).handle.b
+                    connection.a(PacketPlayOutEntityDestroy(npc.id))
+                }
             }
+            npcMap = hashMapOf()
         }
     }
 
@@ -59,15 +62,17 @@ class NPC(
         val profile = GameProfile(this.uuid, name)
         if(signature != null && texture != null) profile.properties.put("textures", Property("textures", texture, signature))
         npc = EntityPlayer(server, world, profile, null)
+        this.id = npc.ae()
         npc.a(player.location.x, player.location.y, player.location.z, player.location.yaw, player.location.pitch)
-        list.add(this)
+        npcMap[this.id] = this
         for(player in Bukkit.getOnlinePlayers()) render(player, npc)
     }
 
     fun remove() {
         for(player in Bukkit.getOnlinePlayers()) {
             val connection = (player as CraftPlayer).handle.b
-            connection.a(PacketPlayOutEntityDestroy(npc.ae()))
+            connection.a(PacketPlayOutEntityDestroy(this.id))
+            npcMap.remove(this.id)
         }
     }
 }

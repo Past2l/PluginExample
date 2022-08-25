@@ -8,6 +8,6 @@ import org.bukkit.event.player.PlayerJoinEvent
 class NPCEvent: Listener {
     @EventHandler
     fun onJoined(event: PlayerJoinEvent) {
-        for(npc in NPC.list) NPC.render(event.player, npc.npc)
+        NPC.npcMap.values.forEach { npc -> NPC.render(event.player, npc.npc) }
     }
 }
