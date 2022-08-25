@@ -2,7 +2,7 @@
   <artifact type="jar" build-on-make="true" name="HealingForest:jar">
     <output-path>$USER_HOME$/Desktop/Minecraft/Spigot_Bukkit/plugins</output-path>
     <root id="archive" name="HealingForest.jar">
-      <element id="module-output" name="HealingForest" />
+      <element id="module-output" name="PluginExample" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/13.0/annotations-13.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/junit/junit/4.10/junit-4.10.jar" path-in-jar="/" />

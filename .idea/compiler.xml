@@ -6,12 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="HealingForest" />
+        <module name="PluginExample" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="HealingForest" target="17" />
-      <module name="healingforest" target="1.8" />
+      <module name="pluginexample" target="17" />
+      <module name="PluginExample" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
