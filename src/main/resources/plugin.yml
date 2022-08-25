@@ -2,6 +2,8 @@ name: PluginExample
 version: '${project.version}'
 main: green.example.Main
 api-version: 1.19
+depend:
+  - ProtocolLib
 libraries:
   - com.squareup.okhttp3:okhttp:4.9.0
 commands:
