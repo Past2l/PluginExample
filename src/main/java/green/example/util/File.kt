@@ -1,5 +1,8 @@
 package green.example.util
 
+import green.example.Main
+import org.bukkit.Bukkit
+import org.bukkit.plugin.java.JavaPlugin
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileOutputStream
@@ -8,7 +11,7 @@ import java.io.OutputStreamWriter
 class File {
     companion object {
         fun write(path: String, data: String) {
-            val file = File("plugins/HealingForest", path)
+            val file = File(JavaPlugin.getPlugin(Main::class.java).dataFolder, path)
             if(!file.exists()) {
                 if(!file.parentFile.exists()) file.parentFile.mkdirs();
                 file.createNewFile();
@@ -21,7 +24,7 @@ class File {
         }
 
         fun read(path: String): String? {
-            val file = File("plugins/HealingForest", path)
+            val file = File(JavaPlugin.getPlugin(Main::class.java).dataFolder, path)
             return if (file.exists()) file.readText(Charsets.UTF_8) else null
         }
 

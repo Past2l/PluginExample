@@ -13,18 +13,14 @@ class Player {
 
         fun createData(): PlayerData {
             return PlayerData(
-                prefix = "",
-                money = 0,
-                popularity = 0
+                prefix = ""
             )
         }
 
         fun loadData(player: org.bukkit.entity.Player): PlayerData? {
             val data = JSON.read("playerdata/${player.uniqueId}.json")
             return if(data== null) null else PlayerData(
-                prefix = data["prefix"] ?: "",
-                money = data["money"]?.toInt() ?: 0,
-                popularity = data["popularity"]?.toInt() ?: 0
+                prefix = data["prefix"] ?: ""
             )
         }
 
@@ -33,8 +29,6 @@ class Player {
             val hashMap: HashMap<String, String> = hashMapOf()
             if(data != null) {
                 hashMap["prefix"] = data.prefix
-                hashMap["money"] = data.money.toString()
-                hashMap["popularity"] = data.popularity.toString()
                 JSON.write("playerdata/${player.uniqueId}.json", hashMap)
             }
         }
