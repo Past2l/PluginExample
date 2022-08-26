@@ -292,3 +292,4 @@ $RECYCLE.BIN/
 start
 start.bat
 *.iml
+.idea/artifacts
