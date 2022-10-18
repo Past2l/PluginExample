@@ -5,5 +5,3 @@ api-version: 1.19
 commands:
   test:
     description: Command for testing plugin.
-  npc:
-    description: NPC management command.
