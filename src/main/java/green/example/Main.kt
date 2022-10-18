@@ -1,6 +1,5 @@
 package green.example
 
-import green.example.custom.command.NPC
 import green.example.custom.command.Test
 import green.example.entity.Player
 import green.example.event.GUIEvent
