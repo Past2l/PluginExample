@@ -29,8 +29,6 @@ class Main : JavaPlugin() {
     private fun initCommands() {
         getCommand("test")?.setExecutor(Test())
         getCommand("test")?.tabCompleter = Test()
-        getCommand("npc")?.setExecutor(NPC())
-        getCommand("npc")?.tabCompleter = NPC()
     }
 
     private fun initEvents() {
