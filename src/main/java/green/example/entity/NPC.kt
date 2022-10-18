@@ -5,6 +5,7 @@ import com.mojang.authlib.properties.Property
 import net.minecraft.network.protocol.game.*
 import net.minecraft.network.protocol.game.PacketPlayOutEntity.PacketPlayOutEntityLook
 import net.minecraft.network.syncher.DataWatcher
+import net.minecraft.network.syncher.DataWatcherRegistry
 import net.minecraft.server.level.EntityPlayer
 import org.bukkit.Bukkit
 import org.bukkit.craftbukkit.v1_19_R1.CraftServer
@@ -38,8 +39,8 @@ class NPC(
             connection.a(PacketPlayOutNamedEntitySpawn(npc))
             connection.a(PacketPlayOutEntityHeadRotation(npc, yaw))
             connection.a(PacketPlayOutEntityLook(npc.ae(), yaw, pitch, true))
-//            watcher.a(DataWatcherRegistry.a.a(16), 127.toByte())
-//            connection.a(PacketPlayOutEntityMetadata(npc.ae(), watcher, true))
+            watcher.b(DataWatcherRegistry.a.a(17), 127.toByte())
+            connection.a(PacketPlayOutEntityMetadata(npc.ae(), watcher, true))
         }
 
         fun remove() {

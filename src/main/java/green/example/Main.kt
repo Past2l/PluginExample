@@ -1,6 +1,5 @@
 package green.example
 
-import com.fasterxml.jackson.databind.JavaType
 import green.example.custom.command.NPC
 import green.example.custom.command.Test
 import green.example.entity.Player
@@ -38,7 +37,6 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(GUIEvent(),this)
         server.pluginManager.registerEvents(PlayerEvent(), this)
         server.pluginManager.registerEvents(NPCEvent(), this)
-        NPCEvent.onNPCClicked()
     }
 
     private fun initGameRules() {
