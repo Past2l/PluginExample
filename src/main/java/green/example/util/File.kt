@@ -30,7 +30,7 @@ class File {
 
         fun list(path: String): Array<String> {
             val res: MutableList<String> = mutableListOf()
-            val file = File("plugins/HealingForest", path)
+            val file = File(JavaPlugin.getPlugin(Main::class.java).dataFolder, path)
             if(!file.exists()) return res.toTypedArray()
             val list = file.listFiles() ?: return res.toTypedArray()
             for(data in list) res.add(data.name)
@@ -38,7 +38,7 @@ class File {
         }
 
         fun exist(path: String): Boolean {
-            return File("plugins/HealingForest", path).exists()
+            return File(JavaPlugin.getPlugin(Main::class.java).dataFolder, path).exists()
         }
     }
 
