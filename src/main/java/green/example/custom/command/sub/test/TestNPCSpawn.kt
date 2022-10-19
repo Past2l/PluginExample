@@ -19,7 +19,7 @@ class TestNPCSpawn: SubCommand {
         label: String,
         args: Array<out String>
     ): Boolean {
-        val nickname = args[2].ifEmpty { "Bbakku_" }
+        val nickname = if (args.size == 2) "Bbakku_" else args[2]
         val skin = Skin.getByNickname(nickname)
         NPC(
             sender as Player,
